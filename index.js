@@ -1,5 +1,4 @@
 const express = require("express");
-
 const app = express();
 
 app.use(express.urlencoded({ extended: false }));
@@ -43,13 +42,13 @@ app.get("/tournament", (req, res) => {
 
 app.get("/tournament/query", (req, res) => {
     let queryTournament = Tournament;
-    if (req.query.minage)
-        queriedTournament = queriedTournament.filter(
-            (tournament) => tournament.age >= parseFloat(req.query.minage)
+    if (req.query.country)
+        queriedTournament = queriedTournament.filter((tournament) => 
+            tournament.country.includes(req.query.country)
         );
-    if (req.query.fullName)
-        queriedTournament = queriedTournament.filter(
-            (tournament) => tournament.fullName.includes(req.query.fullName)
+    if (req.query.age)
+        queriedTournament = queriedTournament.filter((tournament) => 
+            tournament.age.includes(req.query.age)
         );
     res.send(queriedTournament);
 });
